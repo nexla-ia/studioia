@@ -215,9 +215,7 @@
       gap: 12px;
     }
 
-    .gender-opt {
-      position: relative;
-    }
+    .gender-opt { position: relative; }
 
     .gender-opt input {
       position: absolute;
@@ -244,28 +242,11 @@
       background: rgba(201,169,110,0.06);
     }
 
-    .gender-opt label:hover {
-      border-color: rgba(201,169,110,0.4);
-    }
+    .gender-opt label:hover { border-color: rgba(201,169,110,0.4); }
 
-    .gender-icon {
-      font-size: 32px;
-      line-height: 1;
-    }
-
-    .gender-name {
-      font-size: 13px;
-      font-weight: 500;
-      letter-spacing: 0.05em;
-      color: var(--text);
-    }
-
-    .gender-desc {
-      font-size: 11px;
-      color: var(--muted);
-      text-align: center;
-      line-height: 1.4;
-    }
+    .gender-icon { font-size: 32px; line-height: 1; }
+    .gender-name { font-size: 13px; font-weight: 500; letter-spacing: 0.05em; color: var(--text); }
+    .gender-desc { font-size: 11px; color: var(--muted); text-align: center; line-height: 1.4; }
 
     textarea {
       width: 100%;
@@ -307,10 +288,7 @@
       font-size: 11px;
     }
 
-    .prompt-hint span:hover {
-      border-color: var(--gold);
-      color: var(--gold-light);
-    }
+    .prompt-hint span:hover { border-color: var(--gold); color: var(--gold-light); }
 
     .btn-submit {
       width: 100%;
@@ -370,24 +348,10 @@
       animation: spin 1s linear infinite;
     }
 
-    .loading-text {
-      font-family: 'Playfair Display', serif;
-      font-style: italic;
-      color: var(--gold);
-      font-size: 18px;
-    }
+    .loading-text { font-family: 'Playfair Display', serif; font-style: italic; color: var(--gold); font-size: 18px; }
+    .loading-sub { color: var(--muted); font-size: 13px; }
 
-    .loading-sub {
-      color: var(--muted);
-      font-size: 13px;
-    }
-
-    .result-section {
-      display: none;
-      animation: fadeUp 0.6s ease both;
-      margin-top: 16px;
-    }
-
+    .result-section { display: none; animation: fadeUp 0.6s ease both; margin-top: 16px; }
     .result-section.active { display: block; }
 
     .result-img-wrap {
@@ -397,10 +361,7 @@
       border: 1px solid var(--border);
     }
 
-    .result-img-wrap img {
-      width: 100%;
-      display: block;
-    }
+    .result-img-wrap img { width: 100%; display: block; }
 
     .result-actions {
       display: grid;
@@ -428,10 +389,7 @@
       gap: 8px;
     }
 
-    .btn-secondary:hover {
-      border-color: var(--gold);
-      color: var(--gold-light);
-    }
+    .btn-secondary:hover { border-color: var(--gold); color: var(--gold-light); }
 
     .error-box {
       display: none;
@@ -439,7 +397,7 @@
       border: 1px solid rgba(220,80,80,0.3);
       border-radius: 10px;
       padding: 16px 20px;
-      color: #f08080;
+      color: #c0392b;
       font-size: 14px;
       margin-top: 12px;
       line-height: 1.5;
@@ -457,9 +415,7 @@
       to   { opacity: 1; transform: translateY(0); }
     }
 
-    @keyframes spin {
-      to { transform: rotate(360deg); }
-    }
+    @keyframes spin { to { transform: rotate(360deg); } }
 
     @media (max-width: 480px) {
       .card { padding: 24px 20px; }
@@ -481,7 +437,6 @@
     <p class="subtitle">Envie a foto da roupa, escolha o perfil da modelo<br>e a IA gera a imagem pronta pra postar.</p>
   </header>
 
-  <!-- Upload -->
   <div class="card">
     <p class="card-label">01 — Foto da peça</p>
     <div class="upload-zone" id="uploadZone">
@@ -498,7 +453,6 @@
     </div>
   </div>
 
-  <!-- Gênero -->
   <div class="card">
     <p class="card-label">02 — Tipo de modelo</p>
     <div class="gender-grid">
@@ -521,7 +475,6 @@
     </div>
   </div>
 
-  <!-- Prompt -->
   <div class="card">
     <p class="card-label">03 — Características da modelo</p>
     <textarea
@@ -546,7 +499,6 @@
 
   <div class="error-box" id="errorBox"></div>
 
-  <!-- Resultado -->
   <div class="result-section" id="resultSection">
     <div class="card" style="padding: 24px;">
       <p class="card-label">Resultado</p>
@@ -554,7 +506,6 @@
         <img id="resultImg" src="" alt="Imagem gerada" />
       </div>
       <div class="result-actions">
-        <!-- CORRIGIDO: button em vez de <a download> para suportar data URI grande -->
         <button class="btn-secondary" id="downloadBtn">
           ⬇ Baixar imagem
         </button>
@@ -567,7 +518,6 @@
 
 </div>
 
-<!-- Loading -->
 <div class="loading-overlay" id="loadingOverlay">
   <div class="spinner"></div>
   <p class="loading-text">Gerando sua imagem...</p>
@@ -591,7 +541,6 @@
 
   let selectedFile = null;
 
-  // Drag and drop
   uploadZone.addEventListener('dragover', e => { e.preventDefault(); uploadZone.classList.add('drag-over'); });
   uploadZone.addEventListener('dragleave', () => uploadZone.classList.remove('drag-over'));
   uploadZone.addEventListener('drop', e => {
@@ -650,7 +599,6 @@
 
     const genero = document.querySelector('input[name="gender"]:checked').value;
     const prompt = document.getElementById('promptInput').value.trim();
-
     const base64 = await toBase64(selectedFile);
 
     const payload = {
@@ -675,17 +623,10 @@
 
       const data = await response.json();
 
-      /*
-        Aceita qualquer uma dessas chaves vindas do n8n:
-          - imagem_url  → data URI completa  (data:image/png;base64,...)  ← recomendado
-          - url         → idem
-          - imagem      → idem
-          - image_url   → idem
-          - base64      → base64 cru (sem prefixo) — monta a data URI aqui
-      */
+      // Aceita imagem_url, url, imagem ou image_url como chave de retorno
       let imgSrc = data.imagem_url || data.url || data.imagem || data.image_url;
 
-      // Fallback: se vier base64 cru, monta a data URI
+      // Fallback: base64 cru sem prefixo
       if (!imgSrc && data.base64) {
         const mime = data.mime_type || 'image/png';
         imgSrc = `data:${mime};base64,${data.base64}`;
@@ -693,17 +634,30 @@
 
       if (!imgSrc) throw new Error('A IA não retornou uma imagem. Verifique o fluxo no n8n.');
 
+      // Exibe a imagem
       resultImg.src = imgSrc;
       resultSection.classList.add('active');
 
-      // Download via blob — funciona com data URI de qualquer tamanho
+      // Download via Blob — funciona com data URI de qualquer tamanho
       downloadBtn.onclick = () => {
-        const a = document.createElement('a');
-        a.href = imgSrc;
-        a.download = 'modelo-ia.png';
-        document.body.appendChild(a);
-        a.click();
-        document.body.removeChild(a);
+        try {
+          const [header, b64] = imgSrc.split(',');
+          const mime = header.match(/:(.*?);/)[1];
+          const bytes = atob(b64);
+          const arr = new Uint8Array(bytes.length);
+          for (let i = 0; i < bytes.length; i++) arr[i] = bytes.charCodeAt(i);
+          const blob = new Blob([arr], { type: mime });
+          const blobUrl = URL.createObjectURL(blob);
+          const a = document.createElement('a');
+          a.href = blobUrl;
+          a.download = 'modelo-ia.png';
+          document.body.appendChild(a);
+          a.click();
+          document.body.removeChild(a);
+          setTimeout(() => URL.revokeObjectURL(blobUrl), 5000);
+        } catch(e) {
+          mostrarErro('Erro ao baixar imagem: ' + e.message);
+        }
       };
 
       setTimeout(() => resultSection.scrollIntoView({ behavior: 'smooth', block: 'start' }), 100);
