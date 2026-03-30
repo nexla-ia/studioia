@@ -354,45 +354,10 @@
     .result-section { display: none; animation: fadeUp 0.6s ease both; margin-top: 16px; }
     .result-section.active { display: block; }
 
-    .result-img-wrap {
-      border-radius: var(--radius);
-      overflow: hidden;
-      position: relative;
-      border: 1px solid var(--border);
-      background: linear-gradient(90deg, var(--surface2) 25%, #e8e2d8 50%, var(--surface2) 75%);
-      background-size: 200% 100%;
-      animation: shimmer 1.4s infinite;
-      min-height: 360px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
-
-    .result-img-wrap.loaded {
-      background: var(--surface2);
-      animation: none;
-    }
-
-    .result-img-wrap img {
-      width: 100%;
-      display: block;
-      opacity: 0;
-      transition: opacity 0.5s ease;
-    }
-
-    .result-img-wrap img.loaded { opacity: 1; }
-
-    .result-actions { display: none; }
-    .result-actions.visible {
+    .result-actions {
       display: grid;
       grid-template-columns: 1fr 1fr;
       gap: 12px;
-      margin-top: 12px;
-    }
-
-    @keyframes shimmer {
-      0%   { background-position: 200% 0; }
-      100% { background-position: -200% 0; }
     }
 
     .btn-secondary {
@@ -527,9 +492,6 @@
   <div class="result-section" id="resultSection">
     <div class="card" style="padding: 24px;">
       <p class="card-label">Resultado</p>
-      <div class="result-img-wrap" id="resultImgWrap">
-        <img id="resultImg" src="" alt="" />
-      </div>
       <div class="result-actions" id="resultActions">
         <button class="btn-secondary" id="downloadBtn">
           ⬇ Baixar imagem
@@ -560,7 +522,6 @@
   const submitBtn      = document.getElementById('submitBtn');
   const errorBox       = document.getElementById('errorBox');
   const resultSection  = document.getElementById('resultSection');
-  const resultImg      = document.getElementById('resultImg');
   const downloadBtn    = document.getElementById('downloadBtn');
   const loadingOverlay = document.getElementById('loadingOverlay');
 
@@ -659,24 +620,6 @@
 
       if (!imgSrc) throw new Error('A IA não retornou uma imagem. Verifique o fluxo no n8n.');
 
-      // Exibe a imagem
-      const wrap = document.getElementById('resultImgWrap');
-      const actions = document.getElementById('resultActions');
-
-      wrap.classList.remove('loaded');
-      resultImg.classList.remove('loaded');
-      actions.classList.remove('visible');
-
-      resultImg.onload = () => {
-        wrap.classList.add('loaded');
-        resultImg.classList.add('loaded');
-        actions.classList.add('visible');
-      };
-      resultImg.onerror = () => {
-        wrap.classList.add('loaded');
-        resultImg.alt = 'Erro ao carregar imagem';
-      };
-      resultImg.src = imgSrc;
       resultSection.classList.add('active');
 
       // Download via Blob — funciona com data URI de qualquer tamanho
@@ -718,10 +661,6 @@
     previewWrap.style.display = 'none';
     uploadZone.style.display = 'block';
     resultSection.classList.remove('active');
-    resultImg.src = '';
-    resultImg.classList.remove('loaded');
-    document.getElementById('resultImgWrap').classList.remove('loaded');
-    document.getElementById('resultActions').classList.remove('visible');
     downloadBtn.onclick = null;
     window.scrollTo({ top: 0, behavior: 'smooth' });
   }
