@@ -359,9 +359,21 @@
       overflow: hidden;
       position: relative;
       border: 1px solid var(--border);
+      background: var(--surface2);
+      min-height: 320px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
     }
 
-    .result-img-wrap img { width: 100%; display: block; }
+    .result-img-wrap img {
+      width: 100%;
+      display: block;
+      opacity: 0;
+      transition: opacity 0.4s ease;
+    }
+
+    .result-img-wrap img.loaded { opacity: 1; }
 
     .result-actions {
       display: grid;
@@ -635,7 +647,9 @@
       if (!imgSrc) throw new Error('A IA não retornou uma imagem. Verifique o fluxo no n8n.');
 
       // Exibe a imagem
+      resultImg.classList.remove('loaded');
       resultImg.src = imgSrc;
+      resultImg.onload = () => resultImg.classList.add('loaded');
       resultSection.classList.add('active');
 
       // Download via Blob — funciona com data URI de qualquer tamanho
