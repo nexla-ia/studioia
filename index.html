@@ -9,14 +9,14 @@
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
     :root {
-      --bg: #0e0d0b;
-      --surface: #171612;
-      --surface2: #1f1e19;
-      --border: rgba(255,255,255,0.07);
-      --gold: #c9a96e;
-      --gold-light: #e8d4a8;
-      --text: #f0ece3;
-      --muted: #7a7567;
+      --bg: #f7f4ef;
+      --surface: #ffffff;
+      --surface2: #f0ece4;
+      --border: rgba(0,0,0,0.08);
+      --gold: #b8864e;
+      --gold-light: #8a6030;
+      --text: #1c1a16;
+      --muted: #9a9080;
       --radius: 14px;
     }
 
@@ -33,10 +33,10 @@
       content: '';
       position: fixed;
       inset: 0;
-      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.025'/%3E%3C/svg%3E");
       pointer-events: none;
       z-index: 0;
-      opacity: 0.6;
+      opacity: 0.8;
     }
 
     .container {
@@ -190,7 +190,7 @@
       position: absolute;
       top: 10px;
       right: 10px;
-      background: rgba(14,13,11,0.85);
+      background: rgba(247,244,239,0.90);
       border: 1px solid var(--border);
       color: var(--text);
       border-radius: 50%;
@@ -205,7 +205,7 @@
     }
 
     .preview-remove:hover {
-      background: #1f1e19;
+      background: #ffffff;
       border-color: var(--gold);
     }
 
@@ -316,7 +316,7 @@
       width: 100%;
       padding: 18px;
       background: var(--gold);
-      color: #0e0d0b;
+      color: #ffffff;
       border: none;
       border-radius: 10px;
       font-family: 'DM Sans', sans-serif;
@@ -350,7 +350,7 @@
       display: none;
       position: fixed;
       inset: 0;
-      background: rgba(14,13,11,0.92);
+      background: rgba(247,244,239,0.92);
       z-index: 100;
       align-items: center;
       justify-content: center;
@@ -373,7 +373,7 @@
     .loading-text {
       font-family: 'Playfair Display', serif;
       font-style: italic;
-      color: var(--gold-light);
+      color: var(--gold);
       font-size: 18px;
     }
 
